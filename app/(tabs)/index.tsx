@@ -9,8 +9,9 @@ export default function Index() {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
+        <Text style={styles.headerTitle}>Quick Timers: </Text>
         <TouchableHighlight 
-          underlayColor="#646464"
+          underlayColor="#115797"
           style={styles.headerTimer} 
           onPress={() => press(60)}>
           <View>
@@ -18,7 +19,7 @@ export default function Index() {
           </View>
         </TouchableHighlight>
         <TouchableHighlight 
-          underlayColor="#646464"
+          underlayColor="#115797"
           style={styles.headerTimer} 
           onPress={() => press(30)}>
           <View>
@@ -26,7 +27,7 @@ export default function Index() {
           </View>
         </TouchableHighlight>
         <TouchableHighlight 
-          underlayColor="#646464"
+          underlayColor="#115797"
           style={styles.headerTimer} 
           onPress={() => press(10)}>
           <View>
@@ -34,7 +35,7 @@ export default function Index() {
           </View>
         </TouchableHighlight>
         <TouchableHighlight 
-          underlayColor="#646464"
+          underlayColor="#115797"
           style={styles.headerTimer} 
           onPress={() => press(5)}>
           <View>
@@ -42,7 +43,7 @@ export default function Index() {
           </View>
         </TouchableHighlight>
         <TouchableHighlight 
-          underlayColor="#646464"
+          underlayColor="#115797"
           style={styles.headerTimer} 
           onPress={() => press(1)}>
           <View>
@@ -66,21 +67,25 @@ const styles = StyleSheet.create({
   header:{
     backgroundColor:'#353c44',
     width:'100%',
-    height: '5%',
-    flexDirection:'row'
+    flexDirection:'row',
+    alignItems:"center",
+    justifyContent:'center',
+  },
+  headerTitle:{
+    fontSize: 24,
+    color: '#fff',
+    paddingHorizontal:20,
+    backgroundColor:"#1964b4",
+    paddingVertical:5
   },
   headerTimer:{
     flex:1,
-    justifyContent:'center',
-    alignItems:'center'
+    backgroundColor:"#3273b9",
+    paddingVertical:5
   },
   text: {
     fontSize: 24,
     color: '#fff',
-  },
-  button: {
-    fontSize: 24,
-    textDecorationLine: 'underline',
-    color: '#fff',
+    textAlign:"center",
   },
 });
