@@ -18,7 +18,7 @@ export default function TimerContainer({label} : Props){
       <ScrollView 
         horizontal={true} 
         contentContainerStyle={styles.contentContainer}
-        showsHorizontalScrollIndicator={false}        
+        persistentScrollbar={true}
       >
         <Timer></Timer>
         <Timer></Timer>
@@ -45,7 +45,9 @@ const styles = StyleSheet.create({
     columnGap:24,
     backgroundColor:"#303e4e",
     padding:10,
-    borderRadius: 15
+    borderRadius: 15,
+    justifyContent:"center",
+    alignItems:"center"
   },
   timer: {
     flex: 1
