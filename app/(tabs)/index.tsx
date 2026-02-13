@@ -90,6 +90,7 @@ const styles = StyleSheet.create({
   },
   quickTimers:{
     columnGap:15,
+    width:"100%"
   },
   headerTimer:{
     flex:1,

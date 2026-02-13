@@ -1,30 +1,48 @@
 
 import Timer from '@/components/Timer';
-import { useState } from 'react';
-import { ScrollView, StyleSheet, Text, View } from "react-native";
+import React, { useState } from 'react';
+import { FlatList, StyleSheet, Text, View } from "react-native";
 import AddTimerButton from './AddTimerButton';
 
 type Props = {
   label: string;
 }
 
-export default function TimerContainer({label} : Props){
-  const [timers,setTimers] = useState([]);
+const DATA = [
+  {
+    timerName:"timer1"
+  },
+  {
+    timerName:"timer2"
+  },
+  {
+    timerName:"timer3"
+  },
+  {
+    timerName:"timer4"
+  },
+];
 
+type ItemProps = {timerName: string};
+
+const Item = ({timerName}: ItemProps) => (
+  <Timer timerName={timerName}></Timer>
+);
+
+export default function TimerContainer({label} : Props){
+  const [timers,setTimers] = useState(DATA);
 
   return (
     <View style={styles.container}>
       <Text style={styles.text}>{label}</Text>
-      <ScrollView 
-        horizontal={true} 
-        contentContainerStyle={styles.contentContainer}
-        persistentScrollbar={true}
+      <FlatList
+        style={styles.FlatListStyle} 
+        data={timers}
+        numColumns={2}
+        renderItem={({item}) => <Item timerName={item.timerName}></Item>}
+        ListFooterComponent={<AddTimerButton/>}
       >
-        <Timer></Timer>
-        <Timer></Timer>
-        <Timer></Timer>
-        <AddTimerButton/>
-      </ScrollView >
+      </FlatList>
     </View>
   )
 
@@ -35,19 +53,23 @@ const styles = StyleSheet.create({
     backgroundColor: '#25292e',
     alignItems: 'flex-start',
     width:"95%",
-    flexDirection: "column"
   },
   text: {
     fontSize: 24,
     color: '#fff',
   },
+  FlatListStyle:{
+    width:"100%",
+    backgroundColor:"purple",
+  },
   contentContainer:{
-    columnGap:24,
+    rowGap:10,
     backgroundColor:"#303e4e",
     padding:10,
     borderRadius: 15,
     justifyContent:"center",
-    alignItems:"center"
+    alignItems:"center",
+    width:"100%",
   },
   timer: {
     flex: 1

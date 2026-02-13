@@ -2,13 +2,17 @@
 import { useState } from 'react';
 import { StyleSheet, Text, View } from "react-native";
 
-export default function Timer(){
+type Props = {
+  timerName?: string;
+}
+
+export default function Timer({timerName}:Props){
   const [duration, setDuration] = useState("00:00");
   const startTime = "00:00";
   return (
     <View style={styles.timerContainer}>
       <Text style={styles.text}>
-        Name of Timer
+        {timerName}
       </Text>
       <Text style={styles.text}>
         {duration}
@@ -23,10 +27,11 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     justifyContent: 'center',
     padding:10,
-    borderRadius:15
+    borderRadius:15,
   },
   text: {
     fontSize: 24,
     color: '#fff',
+    width: "60%"
   },
 });
