@@ -1,21 +1,37 @@
 //import DateTimePicker, { DateTimePickerAndroid } from '@react-native-community/datetimepicker';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from "react-native";
 
 type Props = {
-  timerName?: string;
+  timerName: string;
+  duration: number;
+  startTime: Date;
 }
 
-export default function Timer({timerName}:Props){
-  const [duration, setDuration] = useState("00:00");
-  const startTime = "00:00";
+export default function Timer({timerName, duration, startTime}:Props){
+
+  const [currentDuration, setCurrentDuration] = useState(duration);
+
+  const startingTime = startTime;
+
+  let durationString = "00:00:00";
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentDuration((previousDuration) => previousDuration - 1);
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  durationString=""+currentDuration;
+
   return (
     <View style={styles.timerContainer}>
       <Text style={styles.text}>
         {timerName}
       </Text>
       <Text style={styles.text}>
-        {duration}
+        {durationString}
       </Text>
     </View>
   );
@@ -28,10 +44,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     padding:10,
     borderRadius:15,
+    width:"48%",
+    margin:"1%"
   },
   text: {
     fontSize: 24,
     color: '#fff',
-    width: "60%"
   },
 });

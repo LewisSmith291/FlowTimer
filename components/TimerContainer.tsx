@@ -10,23 +10,35 @@ type Props = {
 
 const DATA = [
   {
-    timerName:"timer1"
+    timerName:"timer1",
+    duration:360,
+    startTime: new Date(),
   },
   {
-    timerName:"timer2"
+    timerName:"timer2",
+    duration:60,
+    startTime: new Date(),
   },
   {
-    timerName:"timer3"
+    timerName:"timer3",
+    duration:600,
+    startTime: new Date(),
   },
   {
-    timerName:"timer4"
+    timerName:"timer4",
+    duration:120,
+    startTime: new Date(),
   },
 ];
 
-type ItemProps = {timerName: string};
+type ItemProps = {
+  timerName: string;
+  duration: number;
+  startTime: Date;
+};
 
-const Item = ({timerName}: ItemProps) => (
-  <Timer timerName={timerName}></Timer>
+const Item = ({timerName, duration, startTime}: ItemProps) => (
+  <Timer timerName={timerName} duration={duration} startTime={startTime}/>
 );
 
 export default function TimerContainer({label} : Props){
@@ -39,7 +51,7 @@ export default function TimerContainer({label} : Props){
         style={styles.FlatListStyle} 
         data={timers}
         numColumns={2}
-        renderItem={({item}) => <Item timerName={item.timerName}></Item>}
+        renderItem={({item}) => <Item timerName={item.timerName} duration={item.duration} startTime={item.startTime}/>}
         ListFooterComponent={<AddTimerButton/>}
       >
       </FlatList>
