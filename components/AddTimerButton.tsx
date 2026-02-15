@@ -1,5 +1,6 @@
-import React from 'react'
-import { Image, StyleSheet, View } from 'react-native'
+import React from 'react';
+import { Image, StyleSheet, View } from 'react-native';
+
 
 export default function AddTimerButton() {
   return (
@@ -12,11 +13,13 @@ export default function AddTimerButton() {
 const styles = StyleSheet.create({
   plusContainer:{
     justifyContent:"center",
+    alignSelf:"center",
     alignItems:"center",
     backgroundColor:"#25292e",
     width:80,
     height:80,
-    borderRadius:15
+    borderRadius:15,
+    margin:"1%",
   },
   plusIcon:{
     width:50,

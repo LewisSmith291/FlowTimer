@@ -72,7 +72,10 @@ const styles = StyleSheet.create({
   },
   FlatListStyle:{
     width:"100%",
-    backgroundColor:"purple",
+    backgroundColor:"#44a0b1",
+    borderRadius: 15,
+    borderColor:"#000",
+    borderWidth:4
   },
   contentContainer:{
     rowGap:10,
