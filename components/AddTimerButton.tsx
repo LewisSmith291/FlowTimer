@@ -16,9 +16,9 @@ const styles = StyleSheet.create({
     alignSelf:"center",
     alignItems:"center",
     backgroundColor:"#25292e",
-    width:80,
-    height:80,
-    borderRadius:15,
+    width:100,
+    height:100,
+    borderRadius:50,
     margin:"1%",
   },
   plusIcon:{

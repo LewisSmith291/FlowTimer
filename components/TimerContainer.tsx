@@ -48,7 +48,7 @@ export default function TimerContainer({label} : Props){
     <View style={styles.container}>
       <Text style={styles.text}>{label}</Text>
       <FlatList
-        style={styles.FlatListStyle} 
+        contentContainerStyle={styles.FlatListStyle} 
         data={timers}
         numColumns={2}
         renderItem={({item}) => <Item timerName={item.timerName} duration={item.duration} startTime={item.startTime}/>}
@@ -63,7 +63,6 @@ export default function TimerContainer({label} : Props){
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#25292e',
-    alignItems: 'flex-start',
     width:"95%",
   },
   text: {
@@ -71,20 +70,10 @@ const styles = StyleSheet.create({
     color: '#fff',
   },
   FlatListStyle:{
-    width:"100%",
     backgroundColor:"#44a0b1",
     borderRadius: 15,
     borderColor:"#000",
-    borderWidth:4
-  },
-  contentContainer:{
-    rowGap:10,
-    backgroundColor:"#303e4e",
-    padding:10,
-    borderRadius: 15,
-    justifyContent:"center",
-    alignItems:"center",
-    width:"100%",
+    borderWidth:4,
   },
   timer: {
     flex: 1
