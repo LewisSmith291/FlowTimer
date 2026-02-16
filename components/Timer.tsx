@@ -6,13 +6,14 @@ import { AnimatedCircularProgress } from 'react-native-circular-progress';
 type Props = {
   timerName: string;
   duration: number;
-  startTime: Date;
 }
 
-export default function Timer({timerName, duration, startTime}:Props){
+export default function Timer({timerName, duration}:Props){
   const [currentDuration, setCurrentDuration] = useState(duration);
   const intitialDuration = duration;
   const startingTime = new Date().getTime();
+
+  let fillPercent = 0;
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -22,13 +23,16 @@ export default function Timer({timerName, duration, startTime}:Props){
   }, []);
 
   const secondsToTimeFormat = (seconds:number) => {
-    if (seconds <= 0) return "00:00:00"
+    if (seconds <= 0) {
+      fillPercent = 100;
+      return "00:00:00";
+    }
     let second = Intl.NumberFormat("en",{minimumIntegerDigits:2}).format(Math.floor(seconds % 60))
     let minute = Intl.NumberFormat("en",{minimumIntegerDigits:2}).format(Math.floor(seconds / 60));
     let hour = Intl.NumberFormat("en",{minimumIntegerDigits:2}).format(Math.floor(seconds / 3600));
+    let outputString = hour+":"+minute+":"+second;
 
-    let outputString = hour+":"+minute+":"+second
-
+    fillPercent = 100 - ((currentDuration / intitialDuration) * 100);
     return outputString;
   };
 
@@ -42,9 +46,9 @@ export default function Timer({timerName, duration, startTime}:Props){
       </Text>
       <AnimatedCircularProgress
       style={styles.progressStyle}
-        size={150}
+        size={180}
         width={5}
-        fill={35}
+        fill={fillPercent}
         rotation={0}
         tintColor="#ffffff"
         lineCap='round'
@@ -60,9 +64,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#303336',
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius:75,
-    width:150,
-    height:150,
+    borderRadius:90,
+    width:180,
+    height:180,
     margin:10,
   },
   progressStyle: {

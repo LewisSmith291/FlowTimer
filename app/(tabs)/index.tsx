@@ -1,5 +1,6 @@
 import TimerContainer from "@/components/TimerContainer";
 import { ScrollView, StyleSheet, Text, TouchableHighlight, View } from "react-native";
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function Index() {
   const press = (duration:number) =>{
@@ -9,7 +10,7 @@ export default function Index() {
   const addQuickTimer = () =>{};
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.headerTitle}>Add Quick Timers: </Text>
         <ScrollView horizontal={true} contentContainerStyle={styles.quickTimers}>
@@ -64,7 +65,7 @@ export default function Index() {
         </ScrollView>
       </View>
       <TimerContainer label={"Quick timers"}></TimerContainer>
-    </View>
+    </SafeAreaView>
   );
 }
 
