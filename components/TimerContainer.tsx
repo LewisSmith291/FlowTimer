@@ -4,11 +4,6 @@ import React, { useState } from 'react';
 import { FlatList, StyleSheet, View } from "react-native";
 import AddTimerButton from './AddTimerButton';
 
-
-type Props = {
-  label: string;
-}
-
 const DATA = [
   {
     timerName:"timer1",

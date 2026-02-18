@@ -4,42 +4,47 @@ import { useEffect, useState } from "react";
 import { ScrollView, StyleSheet, Text, TextInput, TouchableHighlight, View } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 
-const STORAGE_KEY = 'ASYNC_STORAGE_NAME_EXAMPLE';
 
 export default function Index() {
   const [name, setName] = useState("Hello");
 
-  async function loadName(){
-    try {
-      const name = await AsyncStorage.getItem(STORAGE_KEY);
-
-      if (name === null) return;
-      setName(name);
-    }
-    catch (e) {
-      alert(e);
-    }
-  }
-
-  async function saveName(name:any){
-    try {
-      await AsyncStorage.setItem(STORAGE_KEY, name);
-      setName(name);
-    } catch (e) {
-      alert(e);
-    }
-  }
-
   useEffect(() => {
-    loadName();
+    
   }, []);
 
+  async function saveDataToAsyncStorage(key: string, data: string) {
+    try { 
+      if (data) { 
+        await AsyncStorage.setItem(key, JSON.stringify(data)); 
+    } 
+    } catch (error) { 
+    // handle error } 
+    }
+  }
 
+  async function getDataFromAsyncStorage(key: string) { 
+    try { 
+      const data = await AsyncStorage.getItem(key); 
+      // if your data was an json object remember to parse it 
+      if (data) { return JSON.parse(data); } 
+    } catch (error) {
+    // handle error 
+    } 
+  }
 
+  async function clearAsyncStorage(key: string) { 
+    try { 
+      await AsyncStorage.removeItem(key); 
+    } catch (error) { 
+      // handle error }
+    } 
+  }
 
 
   const press = (duration:number) =>{
     alert(duration);
+    alert(getDataFromAsyncStorage("hello"));
+    console.log(getDataFromAsyncStorage("hello"));
   };
 
   const addQuickTimer = () =>{};
@@ -47,8 +52,8 @@ export default function Index() {
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.container}>
-        <Text style={styles.text}>{name}</Text>
-        <TextInput value={name} onChangeText={saveName}></TextInput>
+        <Text style={styles.text}>{getDataFromAsyncStorage("hello")}</Text>
+        <TextInput onChangeText={(thisData) => saveDataToAsyncStorage("hello",thisData )}></TextInput>
         <View style={styles.header}>
           <Text style={styles.headerTitle}>Add Quick Timers: </Text>
           <ScrollView horizontal={true}>
@@ -107,6 +112,7 @@ export default function Index() {
     </SafeAreaProvider>
   );
 }
+
 
 const styles = StyleSheet.create({
   container: {
