@@ -9,18 +9,21 @@ const fourHours = 14400;
 const oneHour = 3600
 const DATA = [
   {
+    key:1,
     timerName:"Antibiotics",
     duration:fourHours,
     startTime: new Date(),
     isPaused: true,
   },
   {
+    key:2,
     timerName:"Paracetamol",
     duration:sixHours,
     startTime: new Date(),
     isPaused: true,
   },
   {
+    key:3,
     timerName:"Ibuprofen",
     duration:oneHour,
     startTime: new Date(),
@@ -33,21 +36,26 @@ type ItemProps = {
   timerName: string;
   duration: number;
   isPaused: boolean;
+  timerIndex: number;
 };
 
 export default function TimerContainer(){
   const [timers,setTimers] = useState(DATA);
   const [timerPaused, setTimerPaused] = useState(DATA.map((timer) => timer.isPaused));
 
-  function toggleTimerPause(){
-    
+  function toggleTimerPause(timerIndex:number){
+    const newPauseList = Array(timerPaused.length);
+    for (let i = 0; i < timerPaused.length; i++){
+      newPauseList[i] = timerIndex !== i ? timerPaused[i] : !timerPaused[i];
+    }
+    setTimerPaused(newPauseList);
   };
 
-  const Item = ({timerName, duration, isPaused}: ItemProps) => (
-    <View style={styles.timerContainer}>
+  const Item = ({timerName, duration, isPaused, timerIndex}: ItemProps) => (
+    <View key={"child_"+timerIndex} style={styles.timerContainer}>
       <Text style={styles.timerName}>{timerName}</Text>
       <Timer duration={duration} isPaused={isPaused}/>
-      <Pressable onPress={() => toggleTimerPause}>
+      <Pressable onPress={() => toggleTimerPause(timerIndex)}>
         <Image 
           style={styles.pausePlay} 
           source={isPaused ? require('./images/pause-svgrepo-com.svg') : require('./images/play-svgrepo-com.svg')}/>
@@ -55,15 +63,14 @@ export default function TimerContainer(){
     </View>
   );
   
-
-
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
         contentContainerStyle={styles.FlatListStyle} 
         data={timers}
         numColumns={1}
-        renderItem={({item, index}) => <Item timerName={item.timerName} duration={item.duration} isPaused={timerPaused[index]} />}
+        renderItem={({item, index}) => <Item timerName={item.timerName} duration={item.duration} 
+        isPaused={timerPaused[index]} timerIndex={index} />}
       />
     </SafeAreaView>
   );

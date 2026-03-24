@@ -11,25 +11,18 @@ type Props = {
 export default function Timer({duration, isPaused}:Props){
   const [currentDuration, setCurrentDuration] = useState(duration);
   const intitialDuration = duration;
-  const startingTime = new Date().getTime();
   const [paused, setPaused] = useState(isPaused);
 
   let fillPercent = 0;
 
-  const togglePaused = () => {
-    setPaused(!paused);
-  }
-
   useEffect(() => {
-    if (!paused){
-      const interval = setInterval(() => {
-        setCurrentDuration((previousDuration) => previousDuration - 1);
-      }, 1000);
-      return () => clearInterval(interval);
-    }
+    const interval = setInterval(() => {
+      setCurrentDuration((previousDuration) => isPaused ? previousDuration :previousDuration - 1);
+    }, 1000);
+    return () => clearInterval(interval);
   }, []);
 
-
+  // Format the seconds into a readable time output
   const secondsToTimeFormat = (seconds:number) => {
     if (seconds <= 0) {
       fillPercent = 100;
