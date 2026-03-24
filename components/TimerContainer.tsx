@@ -4,20 +4,23 @@ import React, { useState } from 'react';
 import { FlatList, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+const sixHours = 21600;
+const fourHours = 14400;
+const oneHour = 3600
 const DATA = [
   {
     timerName:"Antibiotics",
-    duration:360,
+    duration:fourHours,
     startTime: new Date(),
   },
   {
     timerName:"Paracetamol",
-    duration:60,
+    duration:sixHours,
     startTime: new Date(),
   },
   {
     timerName:"Ibuprofen",
-    duration:600,
+    duration:oneHour,
     startTime: new Date(),
   },
 ];
@@ -53,9 +56,9 @@ export default function TimerContainer(){
 const styles = StyleSheet.create({
   container: {
     //backgroundColor: '#25292e',
-    backgroundColor: '#0073ff',
-    alignItems:"center",
-    width:"100%"
+    backgroundColor: '#9c3117',
+    alignItems:"flex-start",
+    flex:1
   },
   text: {
     fontSize: 24,
@@ -63,10 +66,9 @@ const styles = StyleSheet.create({
   },
   FlatListStyle:{
     display:"flex",
-    alignItems:"center",
+    alignItems:"flex-start",
     justifyContent:"center",
-    width:"90%",
-    gap:10,
+    flex:1,
   },
   timerContainer:{
     display:"flex",
@@ -74,6 +76,9 @@ const styles = StyleSheet.create({
     alignItems:"center",
     gap:20,
     backgroundColor:"#323b46",
+    width:"100%",
+    margin:20
+    
   },
   timerName:{
     fontSize: 24,

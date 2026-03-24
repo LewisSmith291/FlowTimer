@@ -26,9 +26,9 @@ export default function Timer({duration}:Props){
       fillPercent = 100;
       return "00:00:00";
     }
-    let second = Intl.NumberFormat("en",{minimumIntegerDigits:2}).format(Math.floor(seconds % 60))
-    let minute = Intl.NumberFormat("en",{minimumIntegerDigits:2}).format(Math.floor(seconds / 60));
     let hour = Intl.NumberFormat("en",{minimumIntegerDigits:2}).format(Math.floor(seconds / 3600));
+    let minute = Intl.NumberFormat("en",{minimumIntegerDigits:2}).format(Math.floor(seconds / 60) % 60);
+    let second = Intl.NumberFormat("en",{minimumIntegerDigits:2}).format(Math.floor(seconds % 60))
     let outputString = hour+":"+minute+":"+second;
 
     fillPercent = 100 - ((currentDuration / intitialDuration) * 100);
