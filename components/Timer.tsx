@@ -5,21 +5,30 @@ import { AnimatedCircularProgress } from 'react-native-circular-progress';
 
 type Props = {
   duration: number;
+  isPaused: boolean;
 }
 
-export default function Timer({duration}:Props){
+export default function Timer({duration, isPaused}:Props){
   const [currentDuration, setCurrentDuration] = useState(duration);
   const intitialDuration = duration;
   const startingTime = new Date().getTime();
+  const [paused, setPaused] = useState(isPaused);
 
   let fillPercent = 0;
 
+  const togglePaused = () => {
+    setPaused(!paused);
+  }
+
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentDuration((previousDuration) => previousDuration - 1);
-    }, 1000);
-    return () => clearInterval(interval);
+    if (!paused){
+      const interval = setInterval(() => {
+        setCurrentDuration((previousDuration) => previousDuration - 1);
+      }, 1000);
+      return () => clearInterval(interval);
+    }
   }, []);
+
 
   const secondsToTimeFormat = (seconds:number) => {
     if (seconds <= 0) {
