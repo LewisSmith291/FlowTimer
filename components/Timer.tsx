@@ -4,11 +4,10 @@ import { StyleSheet, Text, View } from "react-native";
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 
 type Props = {
-  timerName: string;
   duration: number;
 }
 
-export default function Timer({timerName, duration}:Props){
+export default function Timer({duration}:Props){
   const [currentDuration, setCurrentDuration] = useState(duration);
   const intitialDuration = duration;
   const startingTime = new Date().getTime();
@@ -38,9 +37,6 @@ export default function Timer({timerName, duration}:Props){
 
   return (
     <View style={styles.timerContainer}>
-      <Text style={styles.text}>
-        {timerName}
-      </Text>
       <Text style={styles.text}>
         {secondsToTimeFormat(currentDuration)}
       </Text>
@@ -73,7 +69,7 @@ const styles = StyleSheet.create({
     position:"absolute"
   },
   text: {
-    fontSize: 24,
+    fontSize: 32,
     color: '#fff',
   },
 });

@@ -1,43 +1,23 @@
 
 import Timer from '@/components/Timer';
 import React, { useState } from 'react';
-import { FlatList, StyleSheet, View } from "react-native";
-import AddTimerButton from './AddTimerButton';
+import { FlatList, StyleSheet, Text, View } from "react-native";
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const DATA = [
   {
-    timerName:"timer1",
+    timerName:"Antibiotics",
     duration:360,
     startTime: new Date(),
   },
   {
-    timerName:"timer2",
+    timerName:"Paracetamol",
     duration:60,
     startTime: new Date(),
   },
   {
-    timerName:"timer3",
+    timerName:"Ibuprofen",
     duration:600,
-    startTime: new Date(),
-  },
-  {
-    timerName:"timer4",
-    duration:120,
-    startTime: new Date(),
-  },
-  {
-    timerName:"timer4",
-    duration:120,
-    startTime: new Date(),
-  },
-  {
-    timerName:"timer4",
-    duration:120,
-    startTime: new Date(),
-  },
-  {
-    timerName:"timer4",
-    duration:120,
     startTime: new Date(),
   },
 ];
@@ -49,37 +29,54 @@ type ItemProps = {
 };
 
 const Item = ({timerName, duration}: ItemProps) => (
-  <Timer timerName={timerName} duration={duration} />
+  <View style={styles.timerContainer}>
+    <Text style={styles.timerName}>{timerName}</Text>
+    <Timer duration={duration} />
+  </View>
 );
 
 export default function TimerContainer(){
   const [timers,setTimers] = useState(DATA);
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <FlatList
         contentContainerStyle={styles.FlatListStyle} 
         data={timers}
-        numColumns={2}
+        numColumns={1}
         renderItem={({item}) => <Item timerName={item.timerName} duration={item.duration}/>}
-        ListFooterComponent={<AddTimerButton/>}
       />
-    </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#25292e',
+    //backgroundColor: '#25292e',
+    backgroundColor: '#0073ff',
     alignItems:"center",
-    margin:10
+    width:"100%"
   },
   text: {
     fontSize: 24,
     color: '#fff',
   },
   FlatListStyle:{
-    width:"100%",
-    paddingBottom:"20%",
-  }
+    display:"flex",
+    alignItems:"center",
+    justifyContent:"center",
+    width:"90%",
+    gap:10,
+  },
+  timerContainer:{
+    display:"flex",
+    flexDirection:"row",
+    alignItems:"center",
+    gap:20,
+    backgroundColor:"#323b46",
+  },
+  timerName:{
+    fontSize: 24,
+    color: '#fff',
+  },
 });

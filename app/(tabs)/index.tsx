@@ -1,7 +1,7 @@
 import TimerContainer from "@/components/TimerContainer";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useEffect, useState } from "react";
-import { ScrollView, StyleSheet, Text, TextInput, TouchableHighlight, View } from "react-native";
+import { StyleSheet } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 
 
@@ -52,9 +52,7 @@ export default function Index() {
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.container}>
-        <Text style={styles.text}>{getDataFromAsyncStorage("hello")}</Text>
-        <TextInput onChangeText={(thisData) => saveDataToAsyncStorage("hello",thisData )}></TextInput>
-        <View style={styles.header}>
+        {/*<View style={styles.header}>
           <Text style={styles.headerTitle}>Add Quick Timers: </Text>
           <ScrollView horizontal={true}>
             <TouchableHighlight 
@@ -107,6 +105,7 @@ export default function Index() {
             </TouchableHighlight>
           </ScrollView>
         </View>
+        */}
         <TimerContainer />
       </SafeAreaView>
     </SafeAreaProvider>
